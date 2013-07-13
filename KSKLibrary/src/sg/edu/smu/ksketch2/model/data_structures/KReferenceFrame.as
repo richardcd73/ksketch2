@@ -10,6 +10,9 @@ package sg.edu.smu.ksketch2.model.data_structures
 {
 	import flash.geom.Matrix;
 	
+	/**
+	 * 
+	 */
 	public class KReferenceFrame extends KKeyFrameList implements IReferenceFrame
 	{
 		/**

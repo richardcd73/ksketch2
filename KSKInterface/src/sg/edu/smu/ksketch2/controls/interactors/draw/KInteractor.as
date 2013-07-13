@@ -15,6 +15,9 @@ package sg.edu.smu.ksketch2.controls.interactors.draw
 	import sg.edu.smu.ksketch2.canvas.controls.IInteractionControl;
 	import sg.edu.smu.ksketch2.utils.KSelection;
 	
+	/**
+	 * The KInteractor object implements the general details of interactors in K-Sketch.
+	 */
 	public class KInteractor extends EventDispatcher implements IInteractor
 	{
 		protected var _KSketch:KSketch2;

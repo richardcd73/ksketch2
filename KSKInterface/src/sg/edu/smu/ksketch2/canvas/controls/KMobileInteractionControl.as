@@ -128,16 +128,19 @@ package sg.edu.smu.ksketch2.canvas.controls
 		
 		public function undo():void
 		{
+			// case: there is no undo stack
 			if(!_undoStack)
 				_undoStack = new Vector.<IModelOperation>();
 			
+			// case: the undo stack is empty
 			if(_undoStack.length == 0)
 				return;
 			
-			var undoOp:IModelOperation = _undoStack.pop();
-			undoOp.undo();
-			_redoStack.push(undoOp);
+			var undoOp:IModelOperation = _undoStack.pop(); 	// pop the undo stack
+			undoOp.undo();									// perform undo
+			_redoStack.push(undoOp);						// push the redo stack
 			
+			// log the actionaction
 			var log:XML = <op/>;
 			var date:Date = new Date();
 			
@@ -151,16 +154,19 @@ package sg.edu.smu.ksketch2.canvas.controls
 		
 		public function redo():void
 		{
+			// case: there is no redo stack
 			if(!_redoStack)
 				_redoStack = new Vector.<IModelOperation>();
 			
+			// case: the redo stack is empty
 			if(_redoStack.length == 0)
 				return;
 			
-			var redoOp:IModelOperation = _redoStack.pop();
-			redoOp.redo();
-			_undoStack.push(redoOp);
+			var redoOp:IModelOperation = _redoStack.pop();	// pop the redo stack
+			redoOp.redo();									// perform redo
+			_undoStack.push(redoOp);						// push the undo stack
 			
+			// log the action
 			var log:XML = <op/>;
 			var date:Date = new Date();
 			

@@ -10,8 +10,14 @@ package sg.edu.smu.ksketch2.canvas.components.view.objects
 {
 	import flash.events.IEventDispatcher;
 
+	/**
+	 * The IObjectView serves as the interface for handling the view representation of a KObject.
+	 */
 	public interface IObjectView extends IEventDispatcher
 	{
+		/**
+		 * Gets the displayble KObjects.
+		 */
 		function displayable():KObjectView;
 		
 		/**

@@ -11,6 +11,9 @@ package sg.edu.smu.ksketch2.controls.interactors.draw
 	import flash.events.IEventDispatcher;
 	import flash.geom.Point;
 	
+	/**
+	 * The IInteractor object serves as the interface for the interactors in K-Sketch.
+	 */
 	public interface IInteractor extends IEventDispatcher
 	{
 		/**

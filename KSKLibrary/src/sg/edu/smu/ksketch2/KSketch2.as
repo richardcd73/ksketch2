@@ -65,6 +65,9 @@ package sg.edu.smu.ksketch2
 		public var log:XML;
 		public var logStartTime:Number;
 		
+		/**
+		 * The default constructor that initializes the sketch.
+		 */
 		public function KSketch2()
 		{
 			//This super statement is important, do not miss it for goodness's sake
@@ -74,6 +77,9 @@ package sg.edu.smu.ksketch2
 		}
 		
 		//General Functions
+		/**
+		 * Initializes the sketch.
+		 */
 		public function init():void
 		{
 			_sceneGraph = new KSceneGraph();
@@ -81,6 +87,9 @@ package sg.edu.smu.ksketch2
 			_groupingUtil = new KStaticGroupingUtil();
 		}
 		
+		/**
+		 * Resets the sketch.
+		 */
 		public function reset():void
 		{
 			init();
@@ -88,11 +97,19 @@ package sg.edu.smu.ksketch2
 			dispatchEvent(new KSketchEvent(KSketchEvent.EVENT_MODEL_UPDATED));
 		}
 		
+		/**
+		 * Retreieves the XML representation of the sketch's current scene.
+		 * 
+		 * @return The sketch's current scene.
+		 */
 		public function get sceneXML():XML
 		{
 			return _sceneGraph.serialize();
 		}
 		
+		/**
+		 * Begins the sketching session.
+		 */
 		public function beginSession():void
 		{
 			log = <session/>;
@@ -115,6 +132,11 @@ package sg.edu.smu.ksketch2
 			}
 		}
 		
+		/**
+		 * Gets the session log's XML representation.
+		 * 
+		 * @return The session log's XML representation.
+		 */
 		public function get sessionLog():XML
 		{
 			if(!log)
@@ -123,6 +145,11 @@ package sg.edu.smu.ksketch2
 			return log;
 		}
 		
+		/**
+		 * Generate the sketch's current scene from the target XML representation.
+		 * 
+		 * @param xml The target XML representation.
+		 */
 		public function generateSceneFromXML(xml:XML):void
 		{
 			if(_sceneGraph.root.children.length() != 0)
@@ -131,11 +158,21 @@ package sg.edu.smu.ksketch2
 			dispatchEvent(new KSketchEvent(KSketchEvent.EVENT_MODEL_UPDATED));
 		}
 		
+		/**
+		 * ???.
+		 * 
+		 * @return ???.
+		 */
 		public function get root():KGroup
 		{
 			return _sceneGraph.root;
 		}
 		
+		/**
+		 * Gets the sketch's current time.
+		 * 
+		 * @return: The sketch's current time.
+		 */
 		public function get time():int
 		{
 			return _time;
@@ -158,7 +195,10 @@ package sg.edu.smu.ksketch2
 		 * Adds a KStroke Image to the model's root
 		 * Also Adds an operation to the operation stack
 		 */
-		public function object_Add_Stroke(points:Vector.<Point>, time:int, color:uint, thickness:Number, op:KCompositeOperation):KStroke
+		public function object_Add_Stroke(points:Vector.<Point>,
+										  time:int, color:uint,
+										  thickness:Number,
+										  op:KCompositeOperation):KStroke
 		{
 			var newStroke:KStroke = new KStroke(_sceneGraph.nextHighestID, points, color, thickness);
 			_sceneGraph.registerObject(newStroke, op);
@@ -229,16 +269,38 @@ package sg.edu.smu.ksketch2
 		}
 		
 		//Transform functions
+		/**
+		 * ???.
+		 * 
+		 * @param object ???.
+		 * @param transitionType ???.
+		 * @param op ???.
+		 */
 		public function beginTransform(object:KObject, transitionType:int, op:KCompositeOperation):void
 		{
 			object.transformInterface.beginTransition(time, transitionType, op);
 		}
 		
+		/**
+		 * ???.
+		 * 
+		 * @param object The target object.
+		 * @param dx ???.
+		 * @param dy ???.
+		 * @param dTheta ???.
+		 * @param dScale ???.
+		 */
 		public function updateTransform(object:KObject, dx:Number, dy:Number, dTheta:Number, dScale:Number):void
 		{
 			object.transformInterface.updateTransition(time, dx, dy, dTheta, dScale);
 		}
 		
+		/**
+		 * ???
+		 * 
+		 * @param object The target object.
+		 * @param op The composite operation.
+		 */
 		public function endTransform(object:KObject, op:KCompositeOperation):void
 		{
 			object.transformInterface.endTransition(time, op);
@@ -248,6 +310,11 @@ package sg.edu.smu.ksketch2
 		/**
 		 * Function to change key time
 		 * It's really just here for the sake of logging things
+		 * 
+		 * @param object The target object.
+		 * @param key The key frame.
+		 * @param newTime The new time to log for the key frame.
+		 * @param op The composite operation.
 		 */
 		public function editKeyTime(object:KObject, key:IKeyFrame, newTime:int, op:KCompositeOperation):void
 		{ 

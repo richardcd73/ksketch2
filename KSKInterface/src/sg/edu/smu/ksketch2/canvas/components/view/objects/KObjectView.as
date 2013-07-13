@@ -20,6 +20,9 @@ package sg.edu.smu.ksketch2.canvas.components.view.objects
 	import sg.edu.smu.ksketch2.operators.KSingleReferenceFrameOperator;
 	import sg.edu.smu.ksketch2.operators.operations.KCompositeOperation;
 	
+	/**
+	 * The KObjectView class handles the view representation of a KObject.
+	 */
 	public class KObjectView extends Sprite implements IObjectView
 	{		
 		protected var _object:KObject;

@@ -17,36 +17,75 @@ package sg.edu.smu.ksketch2.controls.interactors.draw
 	import sg.edu.smu.ksketch2.canvas.components.view.KModelDisplay;
 	import sg.edu.smu.ksketch2.canvas.components.view.objects.KObjectView;
 	
+	/**
+	 * The KEraserInteractor object handles the erasing interaction of the K-Sketch interface.
+	 */
 	public class KEraserInteractor extends KInteractor
 	{
-		private var _currentOperation:KCompositeOperation;
-		private var _modelDisplay:KModelDisplay;
-		private var _startPoint:Point;
-		private var _currentPoint:Point;
+		private var _currentOperation:KCompositeOperation;	// the current operation
+		private var _modelDisplay:KModelDisplay;			// the model display
+		private var _startPoint:Point;						// the starting point
+		private var _currentPoint:Point;					// the current point
 		
-		public function KEraserInteractor(KSketchInstance:KSketch2, interactionControl:IInteractionControl, modelDisplay:KModelDisplay)
+		/**
+		 * Constructs the KEraserInteractor object.
+		 * 
+		 * @param KSketchInstance The current sketch.
+		 * @param interactionControl The interaction control.
+		 * @param modelDisplay The model display.
+		 */
+		public function KEraserInteractor(KSketchInstance:KSketch2,
+										  interactionControl:IInteractionControl,
+										  modelDisplay:KModelDisplay)
 		{
+			// set the current sketch and interaction control
 			super(KSketchInstance, interactionControl);
+			
+			// set the model display
 			_modelDisplay = modelDisplay;
 		}
 		
+		/**
+		 * Begins the interaction by initializing the interaction control and current operation.
+		 * 
+		 * @param point A dummy point.
+		 */
 		override public function interaction_Begin(point:Point):void
 		{
+			// indicate the start of the interaction control (i.e., appears to consist of doing nothing)
 			_interactionControl.begin_interaction_operation();
+			
+			// initialize the current operation
 			_currentOperation = new KCompositeOperation();
 		}
 		
+		/**
+		 * ???.
+		 * 
+		 * @param point
+		 */
 		override public function interaction_Update(point:Point):void
 		{
+			// ???
 			var view:IObjectView;
+			
+			// ???
 			point = _modelDisplay.localToGlobal(point);
+			
+			// ???
 			for each (view in _modelDisplay.viewsTable)
 			{
+				// ???
 				if((view as KObjectView).alpha > 0)
+				{
 					(view as KObjectView).eraseIfHit(point.x, point.y, _KSketch.time, _currentOperation);
+				}
 			}
 		}
 		
+		/**
+		 * ...
+		 */
 		override public function interaction_End():void
 		{
 			if(_currentOperation.length == 0)
