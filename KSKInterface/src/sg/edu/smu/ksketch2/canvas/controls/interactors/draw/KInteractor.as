@@ -15,60 +15,59 @@ package sg.edu.smu.ksketch2.canvas.controls.interactors.draw
 	import sg.edu.smu.ksketch2.canvas.controls.IInteractionControl;
 	import sg.edu.smu.ksketch2.utils.KSelection;
 	
+	/**
+	 * The KInteractor class serves as the pseudo-abstract class for
+	 * interactors in K-Sketch.
+	 */
 	public class KInteractor extends EventDispatcher implements IInteractor
 	{
-		protected var _KSketch:KSketch2;
-		protected var _interactionControl:IInteractionControl;
+		protected var _KSketch:KSketch2;							// the ksketch instance
+		protected var _interactionControl:IInteractionControl;		// the interaction control
 
-		//Variables for operations
-		protected var _oldSelection:KSelection;
-		protected var _newSelection:KSelection;
-		protected var _interactionStartTime:int;
-		protected var _interactionEndTime:int;
+		// variables for operations
+		protected var _oldSelection:KSelection;						// the old selection
+		protected var _newSelection:KSelection;						// the new selection
+		protected var _interactionStartTime:int;					// the interaction start time
+		protected var _interactionEndTime:int;						// the interaction end time
 		
+		/**
+		 * The main constructor of the KInteractor class.
+		 * 
+		 * @param KSketchIntance The ksketch object.
+		 * @param interactionControl The interaction control.
+		 */
 		public function KInteractor(KSketchInstance:KSketch2, interactionControl:IInteractionControl)
 		{
+			// sets the interactor
 			super(this);
+			
+			// sets the ksketch instance
 			_KSketch = KSketchInstance;
+			
+			// sets the interaction control
 			_interactionControl = interactionControl;
 		}
 		
-		/**
-		 * Prepares this interactor for use
-		 * So it has its magical values and will tend to fail less often
-		 */
 		public function activate():void
 		{
 			
 		}
 		
-		/**
-		 * Sets the values of this interactor to their default magical values
-		 */
 		public function reset():void
 		{
 			
 		}
 		
-		/**
-		 * Start of interaction
-		 */
 		public function interaction_Begin(point:Point):void
 		{
 
 		}
 		
-		/**
-		 * Updating interaction
-		 */
 		public function interaction_Update(point:Point):void
 		{
 			
 		}
 		
-		/**
-		 * End interaction
-		 */
 		public function interaction_End():void
 		{
 			
